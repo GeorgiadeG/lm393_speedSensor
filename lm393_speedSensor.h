@@ -11,7 +11,6 @@ class LM393_SpeedSensor
     int timerISR(uint16_t currentTime);
   private:
     int _pin;
-    float _speed;
     unsigned long _lastTime = -1;
     unsigned long _currTime = -1;
 };

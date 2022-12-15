@@ -1,7 +1,7 @@
 #include "lm393_speedSensor.h"
 #include "Arduino.h"
 
-lm393_speedSensor::lm393_speedSensor(int pin)
+LM393_SpeedSensor::LM393_SpeedSensor(int pin)
 {
   _pin = pin;
   pinMode(_pin, INPUT);
@@ -12,7 +12,7 @@ lm393_speedSensor::lm393_speedSensor(int pin)
 *   @param  currentTime: The current time in milliseconds
 *   @retval Exit status 0 -> OK , 1 -> Error
 */
-int lm393_speedSensor::timerISR(uint16_t currentTime)
+int LM393_SpeedSensor::timerISR(uint16_t currentTime)
 {
     if (_lastTime == -1)
     {
@@ -36,6 +36,6 @@ int lm393_speedSensor::timerISR(uint16_t currentTime)
             two interrupts correspond to 1/20 of a rotation
 *   @retval The rotational speed of the motor
 */
-float lm393_speedSensor::getRotationalpeed(){
-    return speed = (1/20 * 2 * PI) / ((_currTime - _lastTime) / 1000);
+float LM393_SpeedSensor::getRotationalSpeed(){
+    return (1/20 * 2 * PI) / ((_currTime - _lastTime) / 1000);
 }
