@@ -12,23 +12,24 @@ LM393_SpeedSensor::LM393_SpeedSensor(int pin)
 *   @param  currentTime: The current time in milliseconds
 *   @retval Exit status 0 -> OK , 1 -> Error
 */
-int LM393_SpeedSensor::timerISR(uint16_t currentTime)
+void LM393_SpeedSensor::timerISR()
 {
+    unsigned long currentTime = _newTime;
     if (_lastTime == -1)
     {
         _lastTime = currentTime;
-        return 0;
+        // Serial.println("test1");
+        // Serial.println(_lastTime);
     } else if (_currTime == -1)
     {
         _currTime = currentTime;
-        return 0;
     } else
     {
         _lastTime = _currTime;
         _currTime = currentTime;
-        return 0;
+        // Serial.println(_currTime);
+        // Serial.println(_lastTime);
     }
-    return 1;
 }
 
 /**
@@ -37,5 +38,12 @@ int LM393_SpeedSensor::timerISR(uint16_t currentTime)
 *   @retval The rotational speed of the motor
 */
 float LM393_SpeedSensor::getRotationalSpeed(){
-    return (1/20 * 2 * PI) / ((_currTime - _lastTime) / 1000);
+    // Serial.println(_currTime);
+    // Serial.println(_lastTime);
+    // Serial.println(1.0/20.0 * 2.0 * PI);
+    // Serial.println((float)(_currTime - _lastTime) / 1000.0);
+    if (_lastTime == -1 || _currTime == -1) {
+        return 0;
+    } 
+    return (1.0/20.0 * 2.0 * PI) / ((float)(_currTime - _lastTime) / 1000);
 }
