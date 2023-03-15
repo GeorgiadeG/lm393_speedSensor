@@ -14,6 +14,7 @@ class LM393_SpeedSensor
     int _pin;
     unsigned long _lastTime = -1;
     unsigned long _currTime = -1;
+    unsigned long counter = 0;
 };
 
 #endif

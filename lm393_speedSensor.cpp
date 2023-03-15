@@ -14,6 +14,7 @@ LM393_SpeedSensor::LM393_SpeedSensor(int pin)
 */
 void LM393_SpeedSensor::timerISR()
 {
+    counter++;
     unsigned long currentTime = _newTime;
     if (_lastTime == -1)
     {
